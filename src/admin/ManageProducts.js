@@ -46,6 +46,7 @@ export default function ManageProducts() {
     });
   };
 
+  console.log(products)
   return (
     <Base title="Welcome admin" description="Manage products here">
       {goBack()}

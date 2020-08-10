@@ -30,7 +30,9 @@ export default function StripeCheckout({
     })
       .then((response) => {
         console.log(response);
-        cartEmpty();
+        cartEmpty(() => {
+          console.log("WORKING");
+        });
       })
       .catch((err) => console.log(err));
   };

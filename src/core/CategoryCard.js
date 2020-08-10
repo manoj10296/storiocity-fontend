@@ -3,6 +3,7 @@ import accessories  from '../assets/accessories.jpg'
 import jewellery from '../assets/jewellery.jpg'
 import men from '../assets/men.jpg'
 import women from '../assets/women.jpg'
+import formals from '../assets/formals.jpg'
 import other from '../assets/other.png'
 
 
@@ -16,8 +17,8 @@ const getImage = (name) => {
     if (name ==='Women')
     return women
 
-    if (name ==='Accessories')
-    return accessories
+    if (name ==='Formals')
+    return formals
 
     return other
 }
