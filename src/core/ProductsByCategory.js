@@ -41,9 +41,9 @@ const ProductsByCategory = (props) => {
     <Base
       title={`${categrories && categrories[props.match.params.id] && categrories[props.match.params.id].name}`}
       description="Watch your favourite products"
-      className="container bg-info p-4"
+      className="container  p-4"
     >
-      <div>
+      <div className="row">
         {products.map((product, index) => {
           return (
             <div key={index} className="col-4 mb-4">
@@ -52,7 +52,7 @@ const ProductsByCategory = (props) => {
           );
         })}
         {products.length === 0 && (
-          <h3>
+          <h3 className="text-white">
             No products under this category
           </h3>
         )}
