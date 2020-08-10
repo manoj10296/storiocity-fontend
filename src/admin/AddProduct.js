@@ -13,6 +13,7 @@ export default function AddProduct() {
     photo: "",
     categories: [],
     category: "",
+    size: "", 
     loading: false,
     error: "",
     createdProduct: "",
@@ -84,6 +85,7 @@ export default function AddProduct() {
           name: "",
           description: "",
           photo: "",
+          size: "",
           price: "",
           stock: "",
           loading: false,
@@ -168,58 +170,66 @@ export default function AddProduct() {
           value={price}
         />
       </div>
-      <div className="form-group">
-        <select
-          onChange={handleChange("category")}
-          className="form-control"
-          placeholder="Category"
-        >
-          <option>Select</option>
-          {categories &&
-            categories.map((cate, index) => {
-              return (
-                <option key={index} value={cate._id}>
-                  {cate.name}
-                </option>
-              );
-            })}
-        </select>
+      <div>
+        <label className="radio-inline"><input type="radio" name="optradio" value="S" onChange={handleChange("size")}/>S</label>
+          <label className="radio-inline"><input type="radio" name="optradio" value="M" onChange={handleChange("size")}/>M</label>
+            <label className="radio-inline"><input type="radio" name="optradio" value="L" onChange={handleChange("size")}/>L</label>
+            <label className="radio-inline"><input type="radio" name="optradio" value="XL" onChange={handleChange("size")}/>XL</label>
+            <label className="radio-inline"><input type="radio" name="optradio" value="XXL" onChange={handleChange("size")}/>XXL</label>
       </div>
-      <div className="form-group">
-        <input
-          onChange={handleChange("stock")}
-          type="number"
-          className="form-control"
-          placeholder="Quantity"
-          value={stock}
-        />
-      </div>
+      {console.log(values)}
+            <div className="form-group">
+              <select
+                onChange={handleChange("category")}
+                className="form-control"
+                placeholder="Category"
+              >
+                <option>Select</option>
+                {categories &&
+                  categories.map((cate, index) => {
+                    return (
+                      <option key={index} value={cate._id}>
+                        {cate.name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div className="form-group">
+              <input
+                onChange={handleChange("stock")}
+                type="number"
+                className="form-control"
+                placeholder="Quantity"
+                value={stock}
+              />
+            </div>
 
-      <button
-        type="submit"
-        onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
-      >
-        Create Product
+            <button
+              type="submit"
+              onClick={onSubmit}
+              className="btn btn-outline-success mb-3"
+            >
+              Create Product
       </button>
     </form>
   );
 
   return (
     <Base
-      title="Add a Product"
-      description="Create a new product here"
-      className="container bg-info p-4"
-    >
-      {goBack()}
-      <div className="row bg-dark text-white rounded">
-        <div className="col-md-8 offset-md-2">
-          {successMessage()}
-          {errorMessage()}
-          {disappearMessage()}
-          {createProductForm()}
-        </div>
-      </div>
-    </Base>
+            title="Add a Product"
+            description="Create a new product here"
+            className="container bg-info p-4"
+          >
+            {goBack()}
+            <div className="row bg-dark text-white rounded">
+              <div className="col-md-8 offset-md-2">
+                {successMessage()}
+                {errorMessage()}
+                {disappearMessage()}
+                {createProductForm()}
+              </div>
+            </div>
+          </Base>
   );
 }

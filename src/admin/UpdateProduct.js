@@ -13,6 +13,7 @@ export default function UpdateProduct({ match }) {
     name: "",
     description: "",
     price: "",
+    size: "",
     stock: "",
     photo: "",
     categories: [],
@@ -29,6 +30,7 @@ export default function UpdateProduct({ match }) {
     description,
     price,
     stock,
+    size,
     photo,
     categories,
     category,
@@ -47,10 +49,16 @@ export default function UpdateProduct({ match }) {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ categories: data, formData: new FormData() });
+        setValues({ ...values, categories: data, formData: new FormData() });
       }
     });
   };
+
+  useEffect(() => {
+    if(values.name) {
+      preloadCategories();
+    }
+  },[values.name])
 
   //function to preload all the categories from server
   const preloadProducts = (productId) => {
@@ -58,13 +66,13 @@ export default function UpdateProduct({ match }) {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        preloadCategories();
         setValues({
           ...values,
           name: data.name,
+          size: data.size,
           description: data.description,
           price: data.price,
-          category: data.category,
+          category: data.category._id,
           stock: data.stock,
           formData: new FormData(),
         });
@@ -193,6 +201,14 @@ export default function UpdateProduct({ match }) {
           value={price}
         />
       </div>
+      <div>
+        {console.log('values, ', values)}
+        <label className="radio-inline"><input type="radio" name="optradio" value="S" checked={values.size === "S"} onChange={handleChange("size")} />S</label>
+        <label className="radio-inline"><input type="radio" name="optradio" value="M" checked={values.size === "M"} onChange={handleChange("size")} />M</label>
+        <label className="radio-inline"><input type="radio" name="optradio" value="L" checked={values.size === "L"} onChange={handleChange("size")} />L</label>
+        <label className="radio-inline"><input type="radio" name="optradio" value="XL" checked={values.size === "XL"} onChange={handleChange("size")} />XL</label>
+        <label className="radio-inline"><input type="radio" name="optradio" value="XXL" checked={values.size ==="XXL"} onChange={handleChange("size")} />XXL</label>
+      </div>
       <div className="form-group">
         <select
           onChange={handleChange("category")}
@@ -203,7 +219,7 @@ export default function UpdateProduct({ match }) {
           {categories &&
             categories.map((cate, index) => {
               return (
-                <option key={index} value={cate._id}>
+                <option key={index} selected={values.category === cate._id} value={cate._id}>
                   {cate.name}
                 </option>
               );

@@ -70,6 +70,7 @@ export default function Card({
           {cardDescription}
         </p>
         <p className="btn btn-success rounded  btn-sm px-4">$ {cardPrice}</p>
+          {product.size && <p className="btn btn-success rounded ml-2 btn-sm px-4">{product.size}</p>}
         <div className="row">
           <div className="col-12">{showAddToCart(addToCart)}</div>
           <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>
